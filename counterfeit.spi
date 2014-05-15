@@ -1,0 +1,143 @@
+directive sample 250.0 10
+
+directive plot Unit();P1();P2();P3();P4();P5();CP1();CP2();!c0; !c1; !c2; !c12;  !fc1;!fc2; !fc121; !fc122;!fc1212;!fp1;!fp2;!fp3;!fp4;!fp5; !fp12;!fp13;!fp14;!fp15;!fp23;!fp24;!fp25;!fp34;!fp35;!fp45;!fp123;!fp124;!fp125;!fp134;!fp135;!fp145;!fp234;!fp235;!fp245;!fp345;!fp1234;!fp1235;!fp1245;!fp1345;!fp2345;!fp12345
+
+new a1:chan 
+new a2:chan 
+new a3:chan 
+new a4:chan
+new a5:chan 
+
+new ca1:chan 
+new ca2:chan
+new c0:chan 
+new c1:chan 
+new c2:chan 
+new c12:chan 
+new cf1:chan 
+new cf2:chan
+new f1:chan 
+new f2:chan 
+new f3:chan 
+new f4:chan 
+new f5:chan 
+
+
+new  fc1:chan 
+new fc2:chan 
+new fc121:chan 
+new fc122:chan
+new fc1212:chan
+new  fp1:chan 
+new fp2:chan 
+new  fp3:chan 
+new fp4:chan 
+new  fp5:chan 
+
+new fp12:chan 
+new fp13:chan 
+new fp14:chan 
+new fp15:chan 
+new fp23:chan 
+new fp24:chan 
+new fp25:chan 
+new fp34:chan 
+new fp35:chan
+new fp45:chan
+
+new fp123:chan
+new fp124:chan 
+new fp125:chan
+new fp134:chan 
+new fp135:chan
+new fp145:chan
+new fp234:chan
+new fp235:chan
+new fp245:chan
+new fp345:chan
+
+new fp1234:chan
+new fp1235:chan
+new fp1245:chan
+new fp1345:chan
+new fp2345:chan
+
+new fp12345:chan 
+
+
+let Unit() = do ?a1(); ?a2(); AUnit(0.0); !c0()
+                   or ?a1(); ?ca2(); AUnit(2.0); !c2()
+                   or  ?ca1(); ?a2();AUnit(1.0); !c1()
+                   or  ?ca1(); ?ca2(); AUnit(12.0); !c12()
+
+and AUnit(n:float) = do ?cf1(); if n=1.0 then !fc1()
+    	             else if n=12.0 then !fc121() else ()
+                     or ?cf2(); if n=2.0 then !fc2()
+                     else if n=12.0 then !fc122() else ()
+		     or ?cf1(); ?cf2(); if n=12.0 then !fc1212 else()
+		     or ?f1(); if n = 0.0 then !fp1() else ()
+		     or ?f2(); if n = 0.0 then !fp2() else ()
+		     or ?f3(); if n = 0.0 then !fp3() else ()
+		     or ?f4(); if n = 0.0 then !fp4() else ()
+		     or ?f5(); if n = 0.0 then !fp5() else ()
+		     
+		     or ?f1();?f2(); if n = 0.0 then !fp12() else ()
+		     or ?f1();?f3(); if n = 0.0 then !fp13() else ()
+		     or ?f1();?f4(); if n = 0.0 then !fp14() else ()
+		     or ?f1();?f5(); if n = 0.0 then !fp15() else ()
+		     or ?f2();?f3(); if n = 0.0 then !fp23() else ()
+		     or ?f2();?f4(); if n = 0.0 then !fp24() else ()
+		     or ?f2();?f5(); if n = 0.0 then !fp25() else ()
+		     or ?f3();?f4(); if n = 0.0 then !fp34() else ()
+		     or ?f3();?f5(); if n = 0.0 then !fp35() else ()
+		     or ?f4();?f5(); if n = 0.0 then !fp45() else ()
+
+		     or ?f1();?f2();?f3(); if n = 0.0 then !fp123() else ()
+		     or ?f1();?f2();?f4(); if n = 0.0 then !fp124() else ()
+		     or ?f1();?f2();?f5(); if n = 0.0 then !fp125() else ()
+		     or ?f1();?f3();?f4(); if n = 0.0 then !fp134() else ()
+		     or ?f1();?f3();?f5(); if n = 0.0 then !fp135() else ()
+		     or ?f1();?f4();?f5(); if n = 0.0 then !fp145() else ()
+		     or ?f2();?f3();?f4(); if n = 0.0 then !fp234() else ()
+		     or ?f2();?f3();?f5(); if n = 0.0 then !fp235() else ()
+		     or ?f2();?f4();?f5(); if n = 0.0 then !fp245() else ()
+		     or ?f3();?f4();?f5(); if n = 0.0 then !fp345() else ()
+
+		     or ?f1();?f2();?f3();?f4(); if n = 0.0 then !fp1234() else ()
+		     or ?f1();?f2();?f3();?f5(); if n = 0.0 then !fp1235() else ()
+		     or ?f1();?f2();?f4();?f5(); if n = 0.0 then !fp1245() else ()
+		     or ?f1();?f3();?f4();?f5(); if n = 0.0 then !fp1345() else ()
+		     or ?f2();?f3();?f4();?f5(); if n = 0.0 then !fp2345() else ()
+
+		     or ?f1(); ?f2(); ?f3(); ?f4(); ?f5(); if n = 0.0 then !fp12345() else ()
+
+let P1() = !a1();AP1()
+and AP1() = delay@0.001;!f1()
+
+let CP1() = !ca1(); ACP1()
+and ACP1() = delay@1.0; !cf1()
+
+let P2() = !a2();AP2()
+and AP2() = delay@0.002; !f2()
+
+let CP2() = !ca2(); ACP2()
+and ACP2() = delay@2.0; !cf2()
+
+let P3() = !a3();AP3()
+and AP3() = delay@0.0003; !f3()
+
+let P4() = !a4();AP4()
+and AP4() = delay@0.0004; !f4()
+
+let P5() = !a5();AP5()
+and AP5() = delay@0.0005; !f5()
+
+
+run 1000 of Unit()
+run 700 of P1()
+run 300 of CP1()
+run 800 of P2()
+run 200 of CP2()
+run 1000 of P3()
+run 1000 of P4()
+run 1000 of P5()
